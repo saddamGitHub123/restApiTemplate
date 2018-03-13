@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.backend.restbackend.user.model.LoginResponse;
+
 
 /**
  * 
@@ -31,8 +33,10 @@ public class PageController {
 	
 	@RequestMapping(value = { "/", "/home", "/index" })
 	public ModelAndView index() {
+		logger.info("This is the PageController ");
+
 		ModelAndView mv = new ModelAndView("page");
-		mv.addObject("greeting", "welcome to spring web mvc ");
+		mv.addObject("greeting", "      Welcome to Spring And Hibernate World ");
 		return mv;
 	}
 	/*@RequestMapping(value = "/register", method = RequestMethod.GET)

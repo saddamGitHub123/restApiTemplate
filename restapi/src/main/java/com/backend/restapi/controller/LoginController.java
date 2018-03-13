@@ -45,16 +45,16 @@ public class LoginController {
 			// Create main class Object			
 			User userDetails = loginDAO.checkLogin(loginuser);
 			if (userDetails == null) {
-				//loginResponse.setStatus_code("400");
-				//loginResponse.setStatus_message("User Name and Password not found");
+				loginResponse.setStatus_code("400");
+				loginResponse.setStatus_message("User Name and Password not found");
 				logger.error("User name and password not found");
 				
 				return loginResponse;
 			}
 			else {
 
-			    //loginResponse.setStatus_code("200");
-				//loginResponse.setStatus_message("Successfully");
+			    loginResponse.setStatus_code("200");
+				loginResponse.setStatus_message("Successfully");
 				logger.debug("User name and password  found");
 				//logger.D("User name and password  found");
 				loginResponse.setData(userDetails);
@@ -67,5 +67,49 @@ public class LoginController {
 		}
 	}
 	
+	
+	@RequestMapping(value = "/student", method = RequestMethod.POST)
+	public @ResponseBody LoginResponse awsTest(@RequestBody User loginuser) {
+
+		logger.info("aws Testing");
+		LoginResponse loginResponse = new LoginResponse() ;
+		
+		try {
+			// Create main class Object			
+			//User userDetails = loginDAO.checkLogin(loginuser);
+			String username = loginuser.getUser_Name() ;
+			String password = loginuser.getUser_Password() ;
+			//if (loginuser.getUser_Name() == "syn" && loginuser.getUser_Password() == "1234") {
+			if (username.equals("syn") && password.equals("1234")) {
+				
+				   loginResponse.setStatus_code("200");
+					loginResponse.setStatus_message("Successfully");
+					logger.debug("User name and password  found");
+					//logger.D("User name and password  found");
+					loginuser.setName("Synixia");
+					loginuser.setEmail("synixia@synixia.com");
+					loginuser.setContact("7204414827");
+					loginuser.setShop_ID("Shop_1");
+					loginuser.setUser_ID("User_1");
+					loginuser.setUser_Name("syn");
+					loginuser.setUser_Password("1234");
+					loginResponse.setData(loginuser);
+					
+				return loginResponse;
+			}
+			else {
+				
+				loginResponse.setStatus_code("400");
+				loginResponse.setStatus_message("User Name and Password not found");
+				logger.error("User name and password not found");
+			   
+				return loginResponse;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }
